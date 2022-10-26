@@ -22,7 +22,7 @@ function _scmb_git_branch_shortcuts {
 
   # Use ruby to inject numbers into git branch output
   ruby -e "$( cat <<EOF
-    output = %x($_git_cmd branch --color=always $(token_quote "$@"))
+    output = %x($_git_cmd branch --sort=committerdate --color=always $(token_quote "$@"))
     line_count = output.lines.to_a.size
     output.lines.each_with_index do |line, i|
       spaces = (line_count > 9 && i < 9 ? "  " : " ")
@@ -33,7 +33,7 @@ EOF
 
   # Set numbered file shortcut in variable
   local e=1 IFS=$'\n'
-  for branch in $($_git_cmd branch "$@" | sed "s/^[* ]\{2\}//"); do
+  for branch in $($_git_cmd branch --sort=committerdate "$@" | sed "s/^[* ]\{2\}//"); do
     export $git_env_char$e="$branch"
     if [ "${scmbDebug:-}" = "true" ]; then echo "Set \$$git_env_char$e  => $file"; fi
     let e++
