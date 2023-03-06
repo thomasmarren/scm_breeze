@@ -29,7 +29,7 @@ features.
 ```bash
 git clone https://github.com/thomasmarren/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
-source ~/.bashrc   # or source "${ZDOTDIR:-$HOME}/.zshrc"
+source ~/.zshrc
 ```
 
 The install script creates required default configs and adds the following line
